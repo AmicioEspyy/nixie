@@ -30,7 +30,7 @@ link_directories(${NOTCURSES_LIBRARY_DIRS})
 set(SOURCES ${CMAKE_SOURCE_DIR}/main.cpp)
 
 # Add all source files from src directory
-file(GLOB SRC_FILES "${CMAKE_SOURCE_DIR}/src/*.cpp")
+file(GLOB_RECURSE SRC_FILES "${CMAKE_SOURCE_DIR}/src/*.cpp")
 list(APPEND SOURCES ${SRC_FILES})
 
 # Add executable
