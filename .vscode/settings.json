@@ -1,0 +1,9 @@
+{
+    "C_Cpp.default.configurationProvider": "ms-vscode.cmake-tools",
+    "C_Cpp.configurationWarnings": "disabled",
+    "editor.formatOnSave": true,
+    "cmake.configureOnOpen": true,
+    "C_Cpp.errorSquiggles": "enabled",
+    "C_Cpp.clang_format_style": "{BasedOnStyle: Google, BraceWrapping: {AfterFunction: false, AfterClass: false, AfterNamespace: false, AfterStruct: false, AfterControlStatement: false, AfterEnum: false}, BreakBeforeBraces: Attach, IndentWidth: 4, TabWidth: 4, UseTab: Never}",
+    "editor.tabSize": 4
+}
