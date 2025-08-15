@@ -1,6 +1,7 @@
 #pragma once
 #include <memory>
 
+class Event;
 class Terminal;
 
 class Widget {
@@ -11,7 +12,9 @@ class Widget {
         this->x = x;
         this->y = y;
     }
+
     virtual void render(struct ncplane* plane) = 0;
+    virtual void onEvent(const Event& e) {}
 
    protected:
     Terminal* parent = nullptr;

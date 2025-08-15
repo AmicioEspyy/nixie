@@ -1,3 +1,5 @@
+#include <iostream>
+
 #include "nixie.hpp"
 #include "terminal.hpp"
 #include "widgets/text.hpp"
@@ -9,10 +11,14 @@ int main() {
     txt->set_position(5, 5);
     term->add(txt);
 
-    while (true) {
+    while (term->isRunning()) {
+        term->pollEvents();
+        term->dispatchEvents();
         term->render();
         term->refresh();
     }
 
+    std::system("reset");
+    std::cout << "done." << std::endl;
     return 0;
 }
