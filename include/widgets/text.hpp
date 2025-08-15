@@ -1,7 +1,7 @@
 #pragma once
 #include <string>
 
-#include "widget.hpp"
+#include "Widget.hpp"
 
 class Text : public Widget {
    public:

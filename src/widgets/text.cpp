@@ -1,4 +1,4 @@
-#include "widgets/text.hpp"
+#include "widgets/Text.hpp"
 
 extern "C" {
 #include <notcurses/notcurses.h>

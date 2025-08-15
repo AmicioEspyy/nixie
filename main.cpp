@@ -1,8 +1,8 @@
 #include <iostream>
 
+#include "Terminal.hpp"
 #include "nixie.hpp"
-#include "terminal.hpp"
-#include "widgets/text.hpp"
+#include "widgets/Text.hpp"
 
 int main() {
     auto term = std::make_unique<Terminal>();

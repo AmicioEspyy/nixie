@@ -1,11 +1,11 @@
-#include "terminal.hpp"
+#include "Terminal.hpp"
 
 #include <notcurses/notcurses.h>
 #include <termios.h>
 #include <unistd.h>
 
+#include "Widget.hpp"
 #include "events/KeyEvent.hpp"
-#include "widget.hpp"
 
 Terminal::Terminal() {
     if (tcgetattr(STDIN_FILENO, &orig_termios) == 0) {
