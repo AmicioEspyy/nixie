@@ -2,7 +2,6 @@
 
 #include <fcntl.h>
 #include <notcurses/notcurses.h>
-#include <string.h>
 #include <termios.h>
 #include <unistd.h>
 
@@ -38,18 +37,18 @@ void Terminal::stop() {
     std::fflush(stdout);
 }
 
-void Terminal::add(std::shared_ptr<Widget> widget) {
+void Terminal::add(const std::shared_ptr<Widget>& widget) {
     if (!widget) return;
     widget->set_parent(this);
     widgets.push_back(widget);
 }
 
-void Terminal::clear() {
+void Terminal::clear() const {
     if (!nc) return;
     ncplane_erase(stdplane);
 }
 
-void Terminal::render() {
+void Terminal::render() const {
     if (!running || !stdplane) return;
 
     clear();
@@ -58,7 +57,7 @@ void Terminal::render() {
     }
 }
 
-void Terminal::refresh() {
+void Terminal::refresh() const {
     if (!nc) return;
     notcurses_render(nc);
 }
@@ -66,7 +65,7 @@ void Terminal::refresh() {
 void Terminal::pollEvents() {
     if (!nc) return;
 
-    struct ncinput ni;
+    ncinput ni;
     while (notcurses_get_nblock(nc, &ni) > 0) {
         if (ni.evtype == NCTYPE_PRESS) {
             if (ni.id == 'q') {

@@ -1,5 +1,4 @@
 #pragma once
-#include <termios.h>
 
 #include <memory>
 #include <queue>
@@ -15,13 +14,13 @@ class Terminal {
     ~Terminal();
 
     void stop();
-    void clear();
-    void refresh();
-    void render();
-    void add(std::shared_ptr<Widget> widget);
+    void clear() const;
+    void refresh() const;
+    void render() const;
+    void add(const std::shared_ptr<Widget>& widget);
     void pollEvents();
     void dispatchEvents();
-    bool isRunning() const { return running; }
+    [[nodiscard]] bool isRunning() const { return running; }
 
    private:
     bool running = true;
