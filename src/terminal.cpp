@@ -1,18 +1,20 @@
 #include "Terminal.hpp"
 
+#include <fcntl.h>
 #include <notcurses/notcurses.h>
+#include <string.h>
 #include <termios.h>
 #include <unistd.h>
 
-#include "Widget.hpp"
 #include "events/KeyEvent.hpp"
+#include "widgets/Widget.hpp"
 
 Terminal::Terminal() {
-    if (tcgetattr(STDIN_FILENO, &orig_termios) == 0) {
-        have_orig_termios = true;
-    }
+    // disable notcurses stats messages
+    notcurses_options opts{};
+    opts.flags |= NCOPTION_SUPPRESS_BANNERS;
 
-    nc = notcurses_init(NULL, stdout);
+    nc = notcurses_init(&opts, stdout);
     stdplane = notcurses_stdplane(nc);
 }
 
@@ -31,17 +33,9 @@ void Terminal::stop() {
         stdplane = nullptr;
     }
 
-    if (have_orig_termios) {
-        if (tcsetattr(STDIN_FILENO, TCSANOW, &orig_termios) != 0) {
-            std::fprintf(stderr, "warning: tcsetattr restore failed\n");
-        }
-
-        std::fprintf(stderr, "Terminal::stop() restoring original termios\n");
-        have_orig_termios = false;
-    }
-
+    // disable kitty keyboard protocol
+    std::fputs("\x1b[>0u", stdout);
     std::fflush(stdout);
-    std::fprintf(stderr, "Terminal::stop() done\n");
 }
 
 void Terminal::add(std::shared_ptr<Widget> widget) {

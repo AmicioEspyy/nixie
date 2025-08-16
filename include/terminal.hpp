@@ -24,8 +24,6 @@ class Terminal {
     bool isRunning() const { return running; }
 
    private:
-    struct termios orig_termios{};
-    bool have_orig_termios = false;
     bool running = true;
     struct notcurses* nc;
     struct ncplane* stdplane;

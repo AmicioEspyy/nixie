@@ -18,7 +18,5 @@ int main() {
         term->refresh();
     }
 
-    std::system("reset");
-    std::cout << "done." << std::endl;
     return 0;
 }
