@@ -3,6 +3,7 @@ BreakBeforeBraces: Attach
 IndentWidth: 4
 TabWidth: 4
 UseTab: Never
+ColumnLimit: 130
 BraceWrapping:
   AfterFunction: false
   AfterClass: false

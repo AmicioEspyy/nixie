@@ -1,4 +1,5 @@
 #pragma once
+#include "ui/Position.hpp"
 
 class Event;
 class Terminal;
@@ -7,9 +8,13 @@ class Widget {
    public:
     virtual ~Widget() = default;
     virtual void set_parent(Terminal* terminal) { parent = terminal; }
-    virtual void set_position(const int xc, const int yc) {
-        this->x = xc;
-        this->y = yc;
+    void set_position(int xc, int yc) {
+        pos.x = xc;
+        pos.y = yc;
+    }
+    void set_alignment(HorizontalAlignment h, VerticalAlignment v) {
+        pos.h = h;
+        pos.v = v;
     }
 
     virtual void render(struct ncplane* plane) = 0;
@@ -17,5 +22,5 @@ class Widget {
 
    protected:
     Terminal* parent = nullptr;
-    int x = 0, y = 0;
+    Position pos;
 };

@@ -5,6 +5,8 @@
 #include <termios.h>
 #include <unistd.h>
 
+#include <cassert>
+
 #include "events/KeyEvent.hpp"
 #include "widgets/Widget.hpp"
 
@@ -18,6 +20,18 @@ Terminal::Terminal() {
 }
 
 Terminal::~Terminal() { stop(); }
+
+int Terminal::getWidth() const {
+    unsigned int width = ncplane_dim_x(stdplane);
+    assert(width <= static_cast<unsigned int>(std::numeric_limits<int>::max()));
+    return static_cast<int>(width);
+}
+
+int Terminal::getHeight() const {
+    unsigned int width = ncplane_dim_y(stdplane);
+    assert(width <= static_cast<unsigned int>(std::numeric_limits<int>::max()));
+    return static_cast<int>(width);
+}
 
 void Terminal::stop() {
     if (!running) return;

@@ -1,10 +1,17 @@
 #include "widgets/Text.hpp"
 
+#include "Terminal.hpp"
+
 extern "C" {
 #include <notcurses/notcurses.h>
 }
 
-void Text::render(struct ncplane* plane) {
+void Text::render(ncplane* plane) {
     if (!plane) return;
-    ncplane_putstr_yx(plane, y, x, text.c_str());
+
+    int width = parent->getWidth();
+    int height = parent->getHeight();
+
+    auto [new_x, new_y] = pos.compute(width, height);
+    ncplane_putstr_yx(plane, new_y, new_x, text.c_str());
 }

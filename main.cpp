@@ -8,7 +8,7 @@ int main() {
     auto term = std::make_unique<Terminal>();
 
     auto txt = std::make_shared<Text>("Hello, Nixie!");
-    txt->set_position(5, 5);
+    txt->set_alignment(HorizontalAlignment::CENTER, VerticalAlignment::CENTER);
     term->add(txt);
 
     while (term->isRunning()) {

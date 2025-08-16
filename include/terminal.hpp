@@ -13,6 +13,9 @@ class Terminal {
     Terminal();
     ~Terminal();
 
+    int getWidth() const;
+    int getHeight() const;
+
     void stop();
     void clear() const;
     void refresh() const;
