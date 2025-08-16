@@ -23,7 +23,7 @@ struct Position {
     int offset_x = 0;
     int offset_y = 0;
 
-    std::pair<int, int> compute(int termWidth, int termHeight) {
+    [[nodiscard]] std::pair<int, int> compute(int termWidth, int termHeight, int widgetWidth, int widgetHeight) const {
         int rx = 0;
         int ry = 0;
 
@@ -33,10 +33,10 @@ struct Position {
                     rx = 0;
                     break;
                 case HorizontalAlignment::CENTER:
-                    rx = termWidth / 2;
+                    rx = (termWidth - widgetWidth / 2) / 2;
                     break;
                 case HorizontalAlignment::RIGHT:
-                    rx = termWidth - 1;
+                    rx = termWidth - widgetWidth;
                     break;
             }
         } else if (x.has_value()) {
@@ -49,10 +49,10 @@ struct Position {
                     ry = 0;
                     break;
                 case VerticalAlignment::CENTER:
-                    ry = termHeight / 2;
+                    ry = (termHeight - widgetHeight / 2) / 2;
                     break;
                 case VerticalAlignment::BOTTOM:
-                    ry = termHeight - 1;
+                    ry = termHeight - widgetHeight;
                     break;
             }
         } else if (y.has_value()) {
